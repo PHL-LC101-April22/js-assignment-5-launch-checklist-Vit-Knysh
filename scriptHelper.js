@@ -27,8 +27,36 @@ function validateInput(testInput) {
 };
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
-}
+   for (let i = 2; i < 6; i++) {
+    if (validateInput (arguments[i]) == "Empty") {
+        alert ("All fields are required!");
+        return;
+    };
+   };
+
+   if (validateInput(pilot) != "Not a Number" || validateInput(copilot) != "Not a Number" || validateInput(fuelLevel) != "Is a Number" || validateInput(cargoLevel) != "Is a Number") {
+    alert ("Make sure to enter valid information for each field!");
+    return;
+   };
+
+   let fuelReady = fuelLevel >= 10000;
+   let cargoReady = cargoLevel <= 10000;
+   let readyForLaunch = fuelReady && cargoReady;
+
+   if (!readyForLaunch) {
+    list.querySelector("#launchStatus").innerText = "Shuttle not ready for launch";
+    list.querySelector("#launchStatus").style.color = "red";
+    list.querySelector("#faultyItems").style.visibility = "visible";
+    list.querySelector("#pilotStatus").innerText = `Pilot ${pilot} is ready for launch`;
+    list.querySelector("#copilotStatus").innerText = `Co-pilot ${copilot} is ready for launch`;
+    list.querySelector("#fuelStatus").ineerHTML = `Fuel level ${fuelReady ? "high enough" : "too low"} for launch`;
+    list.querySelector("#cargoStatus").ineerHTML = `Cargo mass ${cargoReady ? "low enough" : "too high"} for launch`;
+   } else {
+    list.querySelector("#launchStatus").innerText = "Shuttle is ready for launch";
+    list.querySelector("#launchStatus").style.color = "green";
+    list.querySelector("#faultyItems").style.visibility = "hidden";
+   };
+};
 
 async function myFetch() {
     let planetsReturned;
