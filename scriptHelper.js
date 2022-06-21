@@ -1,9 +1,9 @@
 // Write your helper functions here!
-require('isomorphic-fetch');
+require("isomorphic-fetch");
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
-   document.querySelector("#missionTarget").ineerHTML =`
+   document.querySelector("#missionTarget").ineerHTML = `
                 <h2>Mission Destination</h2>
                 <ol>
                     <li>Name: ${name}</li>
@@ -12,13 +12,19 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                     <li>Distance from Earth: ${distance}</li>
                     <li>Number of Moons: ${moons}</li>
                 </ol>
-                <img src="">
+                <img src="${imageUrl}">
    `
 }
 
 function validateInput(testInput) {
-   
-}
+   if (testInput == "") {
+    return "Empty";
+   } else if (!isNan (testInput)) {
+    return "Is a Number"
+   } else {
+    return "Not a Number"
+   };
+};
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    
